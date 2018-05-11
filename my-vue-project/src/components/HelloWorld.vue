@@ -6,7 +6,6 @@
  
 <script>
 export default {
-  name: 'hello',
   data () {
     return {
       msg: '这是我的第一个简单的例子！'
