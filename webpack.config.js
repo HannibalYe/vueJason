@@ -20,6 +20,11 @@ module.exports = {
         extensions:['','.js','.json']
     },
     plugins: [
-        new webpack.NoErrorsPlugin()
+        new webpack.NoErrorsPlugin(),
+		new webpack.optimize.CommonsChunkPlugin('common.js'),
+		new webpack.ProvidePlugin({
+			jQuery: "jquery",
+			$: "jquery"
+		})
     ]
 };

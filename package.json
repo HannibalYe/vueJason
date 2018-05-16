@@ -18,6 +18,7 @@
   "homepage": "https://github.com/HannibalYe/vueJason#readme",
   "devDependencies": {
     "webpack": "^4.8.1",
-    "webpack-dev-server": "^3.1.4"
+    "webpack-dev-server": "^3.1.4",
+	"jquery":"^2.2.3"
   }
 }
