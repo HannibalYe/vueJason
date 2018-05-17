@@ -93,6 +93,8 @@
 
 <script>
 import Vue from 'Vue'
+//引用jqeury插件
+import $ from 'jquery'
 //引用组件
 import comA from './components/HelloWorld'
 //引用comput组件
@@ -159,20 +161,21 @@ export default {
   				name:"n4",age:"4"
 			})*/
 			//修改数组中的某一项双向绑定 可以用Vue的全局方法
-			Vue.set(this.list,1,{name:"n4",age:"4"})
+			Vue.set(this.list,1,{name:"n4",age:"4"});
 			//执行push会不断像指定的对象中添加元素
 			/*this.list.push({
   				name:"n4",age:"4"
 			})*/
 		},
 		showDetail(){
+			console.log($("#app").html());
 			this.isPartA = !this.isPartA
 		},
 		onKeydown(){
 			console.log("on-----Keydown")
 		},
 		onComMyEvent(fromEventParam){//参数来自于comA中定义的事件==》this.$emit('my-event',"传递的参数")
-			console.log("onComMyEvent"+fromEventParam)
+			console.log("onComMyEvent"+fromEventParam);
 		}
 	}
 }
