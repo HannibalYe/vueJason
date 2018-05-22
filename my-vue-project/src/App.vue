@@ -94,7 +94,8 @@
 	设置全局指令，写在main.js 的 vue对象中，那么在整个项目中可以调用</div>
 	<input type="text" v-focus> 
 	=================================================================================
-	<router-view></router-view>
+	<router-view name="viewA"></router-view>
+	<keep-alive><router-view></router-view></keep-alive>
 	<router-link :to="appleUrl" tag="li">to apple</router-link>
 	<router-link :to="{path:'apple/red'}">to apple</router-link>
 	<router-link :to="{path:'banana'}">to banana</router-link>
