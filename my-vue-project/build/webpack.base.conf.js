@@ -40,13 +40,13 @@ module.exports = {
       '@': resolve('src'),
     }
   },
-  // 增加一个plugins
+ /* // 增加一个plugins
    plugins: [
       new webpack.ProvidePlugin({
           $: "jquery",
           jQuery: "jquery"
       })
-   ],
+   ],*/
   module: {
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []),
