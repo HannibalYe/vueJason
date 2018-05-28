@@ -1,5 +1,5 @@
 <template>
-  <div class="slide-show">
+  <div class="slide-show" @mouseover="clearInv" @mouseout="runInv">
   	<div>{{msg}}</div>
     <div class="slide-img">
       <a>
@@ -44,11 +44,15 @@ export default {
   	goto(index){
   		this.nowIndex = index
   		console.log(index)
+  		this.$emit('onchange',index)
   	},
   	runInv () {
       this.invId = setInterval(() => {
         this.goto(this.nextImg)
       }, this.inv)
+    },
+    clearInv () {
+      clearInterval(this.invId)
     }
   },
   computed: {
