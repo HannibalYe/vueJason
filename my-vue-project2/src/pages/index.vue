@@ -25,15 +25,17 @@
     </div>
     <div class="index-right">
       <!--<slide-show :slides="slides" :inv="invTime"></slide-show>-->
+      <slide-show :slides="slides" :inv="invTime"></slide-show>
       <div class="index-board-list">
-      	<div class="index-board-item">
+      	<div class="index-board-item" v-for="(item,index) in boardList" 
+      			:class="[{'line-last':index % 2 == 0},'index-board-' + item.id]">
         <!--<div
         class="index-board-item"
         v-for="(item, index) in boardList"
         :class="[{'line-last' : index % 2 !== 0}, 'index-board-' + item.id]">-->
           <div class="index-board-item-inner" >
-          <!--  <h2>{{ item.title }}</h2>
-            <p>{{ item.description }}</p>-->
+         	<h2>{{ item.title }}</h2>
+            <p>{{ item.description }}</p>
             <div class="index-board-button">
               <!--<router-link class="button" :to="{path: 'detail/' + item.toKey}">立即购买</router-link>-->
             </div>  
@@ -45,10 +47,45 @@
 </template>
 
 <script>
+	import slideShow from '../components/slideShow'
 	export default{
+		components:{
+			slideShow
+		},
+		created:function(){
+			this.$http.get('api/boardList')
+			//this.$http.post('api/boardList',{userId:'1234567'})
+			.then((res)=>{
+				this.boardList = res.data.boardList
+				console.log(res.data.boardList);
+			},(error)=>{})
+		},
 		data(){
 			return{
 				msg:'这是首页',
+				invTime: 2000,
+     		slides : [
+	        {
+	          src: require('../assets/slideShow/pic1.jpg'),
+	          title: 'xxx1',
+	          href: 'detail/analysis'
+	        },
+	        {
+	          src: require('../assets/slideShow/pic2.jpg'),
+	          title: 'xxx2',
+	          href: 'detail/count'
+	        },
+	        {
+	          src: require('../assets/slideShow/pic3.jpg'),
+	          title: 'xxx3',
+	          href: 'http://xxx.xxx.com'
+	        },
+	        {
+	          src: require('../assets/slideShow/pic4.jpg'),
+	          title: 'xxx4',
+	          href: 'detail/forecast'
+	        }
+	      ],
 				messageList:[{
 					msgTitle:"PC产品",products:[{producName:"术士",hot:true,url:'sss'},{producName:"战士",url:'sss'},{producName:"法师",url:'ss'}]
 				},
@@ -69,36 +106,7 @@
 					newTitle:"魔兽世界成进军世界竞技大赛门票",descrption:"魔兽世界成进军世界竞技大赛门票 详细。。。。。。。",url:'cccccccccccc'
 				}
 				],
-	      boardList: [
-	        {
-	          title: '开放产品',
-	          description: '开放产品是一款开放产品',
-	          id: 'car',
-	          toKey: 'analysis',
-	          saleout: false
-	        },
-	        {
-	          title: '品牌营销',
-	          description: '品牌营销帮助你的产品更好地找到定位',
-	          id: 'earth',
-	          toKey: 'count',
-	          saleout: false
-	        },
-	        {
-	          title: '使命必达',
-	          description: '使命必达快速迭代永远保持最前端的速度',
-	          id: 'loud',
-	          toKey: 'forecast',
-	          saleout: true
-	        },
-	        {
-	          title: '勇攀高峰',
-	          description: '帮你勇闯高峰，到达事业的顶峰',
-	          id: 'hill',
-	          toKey: 'publish',
-	          saleout: false
-	        }
-	      ],
+				boardList:[]
 			}
 		}
 	}

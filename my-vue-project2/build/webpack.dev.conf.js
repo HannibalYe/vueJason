@@ -9,6 +9,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+const jsonServer = require('json-server')
+var appData = require('../data.json')//加载本地数据文件
+var boardList = appData.boardList//获取对应的本地数据
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -42,7 +45,16 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
-    }
+    },
+    //然后找到devServer,在里面添加
+		before(app) {
+		  app.get('/api/boardList', (req, res) => {
+		    res.json({
+		      errno: 0,
+		      boardList : boardList
+		    })//接口返回json数据，上面配置的数据boardList就赋值给data请求后调用
+		  })
+		}
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -67,6 +79,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     ])
   ]
 })
+
+
 
 module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = process.env.PORT || config.dev.port

@@ -7,7 +7,9 @@ import $ from 'jquery'
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import IndexPage from './pages/index'
+import VueResource from 'vue-resource'
 Vue.use(VueRouter)
+Vue.use(VueResource)
 let router = new VueRouter({
 	mode:'history',
 	routes:[
