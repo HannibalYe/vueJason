@@ -27,12 +27,17 @@
     <div class="app-foot">
       <p>© 2016 fishenal MIT</p>
     </div>
+    <my-dialog></my-dialog>
   </div>
   </div>
 </template>
 
 <script>
+	import MyDialog from './dialog'
 	export default{
+		components:{
+			MyDialog
+		},
 		data(){
 			return{
 				msg:'这是主框架vue'
